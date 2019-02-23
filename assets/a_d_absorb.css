@@ -1,0 +1,196 @@
+
+.footer-logo svg {
+	transition: opacity .4s;
+}
+
+.footer-logo svg path {
+	transition: fill .6s;
+}
+
+.footer-logo:hover svg {
+	opacity: 1;
+	transition: opacity .6s;
+}
+
+.footer-logo:hover svg path {
+	transition: fill .4s;
+	fill: hsl(240, 100%, 70%);
+	animation: rainbow-moose 3s .4s infinite linear;
+}
+
+@keyframes rainbow-moose {
+	0% {
+		fill: hsl(240, 100%, 70%);
+	}
+
+	16.67% {
+		fill: hsl(300, 100%, 50%);
+	}
+
+	33.33% {
+		fill: hsl(0, 100%, 50%);
+	}
+
+	50% {
+		fill: hsl(60, 100%, 50%);
+	}
+
+	66.67% {
+		fill: hsl(120, 100%, 50%);
+	}
+
+	83.33% {
+		fill: hsl(180, 100%, 50%);
+	}
+
+	100% {
+		fill: hsl(240, 100%, 70%);
+	}
+}
+
+
+
+.site {
+	transition: opacity 2s;
+	opacity: 1;
+}
+
+body .mobile-menu-button {
+	opacity: 1;
+	transition: color 200ms, opacity 2s;
+}
+
+.enhanced .footer-logo {
+	position: relative;
+	z-index: 474748;
+}
+
+#yard {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	height: 100vh;
+	width: 100vw;
+	transform: translate(-50%, -50%);
+	z-index: 474747;
+}
+
+#yard .dog {
+	position: absolute;
+	height: 100%;
+	width: 80px;
+	animation: travel linear infinite 10s;
+}
+
+#yard .dog:first-child {
+	z-index: 47;
+}
+
+#yard .dog img {
+	position: absolute;
+	bottom: 0;
+	width: 80px;
+	animation: bounce infinite 4s;
+	cursor: pointer;
+	user-select: none;
+}
+
+.absorbing #yard .dog,
+.absorbing #yard .dog img {
+	animation-play-state: paused;
+	cursor: default;
+}
+
+.absorbing #yard {
+	height: 66px;
+	width: 80px;
+	transition: height 2s linear, width 2s linear;
+}
+
+.moving-offscreen #yard {
+	transition: margin 3s 1.2s ease-in;
+	margin-left: 100vw;
+}
+
+.moving-offscreen #yard .dog {
+	animation: none;
+}
+
+.moving-offscreen #yard .dog img {
+	animation: vibrate .2s 6;
+}
+
+.moving-offscreen .site {
+	transition: transform 1.2s, opacity 1.2s;
+	transform: scale(0);
+	opacity: 0;
+}
+
+body.moving-offscreen .mobile-menu-button {
+	opacity: 0;
+	transition: none;
+}
+
+@keyframes travel {
+	0% {
+		left: 0;
+		transform: scaleX(-1);
+	}
+	50% {
+		left: calc(100% - 80px);
+		transform: scaleX(-1);
+	}
+	50.1% {
+		left: calc(100% - 80px);
+		transform: scaleX(1);
+	}
+	100% {
+		left: 0;
+		transform: scaleX(1);
+	}
+}
+
+@keyframes bounce {
+	from,
+	to {
+		bottom: 0;
+		animation-timing-function: ease-out;
+	}
+	50% {
+		bottom: calc(100% - 66px);
+		animation-timing-function: ease-in;
+	}
+}
+
+@keyframes vibrate {
+	0%, 100% {
+		transform: translate(2px, 1px) rotate(0deg);
+	}
+	10% {
+		transform: translate(-1px, -2px) rotate(-1deg);
+	}
+	20% {
+		transform: translate(-3px, 0px) rotate(1deg);
+	}
+	30% {
+		transform: translate(0px, 2px) rotate(-2deg);
+	}
+	40% {
+		transform: translate(1px, -2px) rotate(1deg);
+	}
+	50% {
+		transform: translate(-1px, 2px) rotate(-1deg);
+	}
+	60% {
+		transform: translate(-3px, 3px) rotate(2deg);
+	}
+	70% {
+		transform: translate(2px, 1px) rotate(-1deg);
+	}
+	80% {
+		transform: translate(-1px, -1px) rotate(1deg);
+	}
+	90% {
+		transform: translate(2px, 2px) rotate(0deg);
+	}
+}
