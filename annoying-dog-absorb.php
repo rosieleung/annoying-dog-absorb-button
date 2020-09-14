@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Annoying Dog Absorb Button
-Version:     1.0.0
+Version:     1.1
 Plugin URI:  https://rosieleung.com/
 Description: Allows your site to be absorbed by a flock of annoying dogs.
 Author:      Rosie Leung
@@ -10,16 +10,23 @@ License:     GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
+defined( 'ABSPATH' ) || exit;
+
+function ada_enqueue_scripts() {
+	ada_enqueue( 'annoying-dog', '/assets/a_d_absorb.css' );
+	ada_enqueue( 'annoying-dog', '/assets/a_d_absorb.js' );
 }
 
-define( 'A_D_ABSORB_URL', untrailingslashit( plugin_dir_url( __FILE__ ) ) );
-define( 'A_D_ABSORB_PATH', dirname( __FILE__ ) );
-define( 'A_D_ABSORB_VERSION', '1.0.0' );
+add_action( 'wp_enqueue_scripts', 'ada_enqueue_scripts' );
 
-add_action( 'plugins_loaded', 'a_d_absorb_init_plugin' );
 
-function a_d_absorb_init_plugin() {
-	include_once( A_D_ABSORB_PATH . '/includes/enqueue.php' );
+function ada_enqueue( $handle, $rel_path, $deps = array(), $in_footer = true ) {
+	$source  = untrailingslashit( plugin_dir_url( __FILE__ ) ) . $rel_path;
+	$version = filemtime( __DIR__ . $rel_path );
+	$ext     = pathinfo( $rel_path, PATHINFO_EXTENSION );
+	if ( $ext === "css" ) {
+		wp_enqueue_style( $handle, $source, $deps, $version );
+	} elseif ( $ext === "js" ) {
+		wp_enqueue_script( $handle, $source, $deps, $version, $in_footer );
+	}
 }
